@@ -36,7 +36,7 @@ func (p Provider) CoreConfig() *oidc.Provider {
 	return config.NewProvider(context.TODO())
 }
 
-// AdditionalScopes returns the generic scopes required by the provider.
-func (Provider) AdditionalScopes() []string {
-	return []string{oidc.ScopeOfflineAccess, "user:email"}
+// Scopes returns the generic scopes required by the provider.
+func (Provider) Scopes() []string {
+	return []string{"user:email"}
 }

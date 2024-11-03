@@ -7,6 +7,7 @@ import (
 	"fmt"
 
 	"github.com/coreos/go-oidc/v3/oidc"
+	"github.com/ubuntu/authd-oidc-brokers/internal/consts"
 	"github.com/ubuntu/authd-oidc-brokers/internal/providers/info"
 	"golang.org/x/oauth2"
 )
@@ -31,9 +32,9 @@ func (p NoProvider) CoreConfig() *oidc.Provider {
 	return nil
 }
 
-// AdditionalScopes returns the generic scopes required by the provider.
-func (p NoProvider) AdditionalScopes() []string {
-	return []string{oidc.ScopeOfflineAccess}
+// Scopes returns the generic scopes required by the provider.
+func (p NoProvider) Scopes() []string {
+	return append(consts.DefaultScopes, oidc.ScopeOfflineAccess)
 }
 
 // AuthOptions is a no-op when no specific provider is in use.

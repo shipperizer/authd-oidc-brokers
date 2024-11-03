@@ -3,6 +3,7 @@ package google
 
 import (
 	"github.com/coreos/go-oidc/v3/oidc"
+	"github.com/ubuntu/authd-oidc-brokers/internal/consts"
 	"github.com/ubuntu/authd-oidc-brokers/internal/providers/noprovider"
 )
 
@@ -24,12 +25,12 @@ func (p Provider) CoreConfig() *oidc.Provider {
 	return nil
 }
 
-// AdditionalScopes returns the generic scopes required by the provider.
+// Scopes returns the generic scopes required by the provider.
 // Note that we do not return oidc.ScopeOfflineAccess, as for TV/limited input devices, the API call will fail as not
 // supported by this application type. However, the refresh token will be acquired and is functional to refresh without
 // user interaction.
 // If we start to support other kinds of applications, we should revisit this.
 // More info on https://developers.google.com/identity/protocols/oauth2/limited-input-device#allowedscopes.
-func (Provider) AdditionalScopes() []string {
-	return []string{}
+func (p Provider) Scopes() []string {
+	return consts.DefaultScopes
 }

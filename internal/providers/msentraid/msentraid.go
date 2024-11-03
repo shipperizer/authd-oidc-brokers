@@ -47,9 +47,9 @@ func (p Provider) CoreConfig() *oidc.Provider {
 	return nil
 }
 
-// AdditionalScopes returns the generic scopes required by the EntraID provider.
-func (p Provider) AdditionalScopes() []string {
-	return []string{oidc.ScopeOfflineAccess, "GroupMember.Read.All", "User.Read"}
+// Scopes returns the generic scopes required by the provider.
+func (p Provider) Scopes() []string {
+	return append(consts.DefaultScopes, oidc.ScopeOfflineAccess, "GroupMember.Read.All", "User.Read")
 }
 
 // AuthOptions returns the generic auth options required by the EntraID provider.
