@@ -194,10 +194,14 @@ func (b *Broker) connectToProvider(ctx context.Context) (authCfg authConfig, err
 	ctx, cancel := context.WithTimeout(ctx, maxRequestDuration)
 	defer cancel()
 
-	provider, err := oidc.NewProvider(ctx, b.issuerURL)
+	provider := b.providerInfo.CoreConfig()
 
-	if err != nil {
-		return authConfig{}, err
+	if provider == nil {
+		provider, err = oidc.NewProvider(ctx, b.issuerURL)
+
+		if err != nil {
+			return authConfig{}, err
+		}
 	}
 
 	oauthCfg := oauth2.Config{
