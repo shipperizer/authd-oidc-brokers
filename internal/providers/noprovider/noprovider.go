@@ -25,6 +25,12 @@ func (p NoProvider) CheckTokenScopes(token *oauth2.Token) error {
 	return nil
 }
 
+// CoreConfig return the oidc.Provider implementation when autodiscovery
+// is not available
+func (p NoProvider) CoreConfig() *oidc.Provider {
+	return nil
+}
+
 // AdditionalScopes returns the generic scopes required by the provider.
 func (p NoProvider) AdditionalScopes() []string {
 	return []string{oidc.ScopeOfflineAccess}

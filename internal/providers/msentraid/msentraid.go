@@ -41,6 +41,12 @@ func New() Provider {
 	}
 }
 
+// CoreConfig return the oidc.Provider implementation when autodiscovery
+// is not available
+func (p Provider) CoreConfig() *oidc.Provider {
+	return nil
+}
+
 // AdditionalScopes returns the generic scopes required by the EntraID provider.
 func (p Provider) AdditionalScopes() []string {
 	return []string{oidc.ScopeOfflineAccess, "GroupMember.Read.All", "User.Read"}

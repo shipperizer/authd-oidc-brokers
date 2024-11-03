@@ -2,6 +2,7 @@
 package google
 
 import (
+	"github.com/coreos/go-oidc/v3/oidc"
 	"github.com/ubuntu/authd-oidc-brokers/internal/providers/noprovider"
 )
 
@@ -15,6 +16,12 @@ func New() Provider {
 	return Provider{
 		NoProvider: noprovider.New(),
 	}
+}
+
+// CoreConfig return the oidc.Provider implementation when autodiscovery
+// is not available
+func (p Provider) CoreConfig() *oidc.Provider {
+	return nil
 }
 
 // AdditionalScopes returns the generic scopes required by the provider.
