@@ -11,6 +11,7 @@ import (
 
 // ProviderInfoer defines provider-specific methods to be used by the broker.
 type ProviderInfoer interface {
+	CoreConfig() *oidc.Provider
 	AdditionalScopes() []string
 	AuthOptions() []oauth2.AuthCodeOption
 	CheckTokenScopes(token *oauth2.Token) error
