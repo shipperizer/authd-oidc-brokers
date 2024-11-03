@@ -195,6 +195,7 @@ func (b *Broker) connectToProvider(ctx context.Context) (authCfg authConfig, err
 	defer cancel()
 
 	provider, err := oidc.NewProvider(ctx, b.issuerURL)
+
 	if err != nil {
 		return authConfig{}, err
 	}
