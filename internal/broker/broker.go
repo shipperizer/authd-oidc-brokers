@@ -20,7 +20,6 @@ import (
 
 	"github.com/coreos/go-oidc/v3/oidc"
 	"github.com/google/uuid"
-	"github.com/ubuntu/authd-oidc-brokers/internal/consts"
 	"github.com/ubuntu/authd-oidc-brokers/internal/providers"
 	providerErrors "github.com/ubuntu/authd-oidc-brokers/internal/providers/errors"
 	"github.com/ubuntu/authd-oidc-brokers/internal/providers/info"
@@ -208,7 +207,7 @@ func (b *Broker) connectToProvider(ctx context.Context) (authCfg authConfig, err
 		ClientID:     b.oidcCfg.ClientID,
 		ClientSecret: b.clientSecret,
 		Endpoint:     provider.Endpoint(),
-		Scopes:       append(consts.DefaultScopes, b.providerInfo.AdditionalScopes()...),
+		Scopes:       b.providerInfo.Scopes(),
 	}
 
 	return authConfig{provider: provider, oauth: oauthCfg}, nil
