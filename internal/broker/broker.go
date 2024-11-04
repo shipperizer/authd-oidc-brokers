@@ -734,9 +734,16 @@ func (b *Broker) fetchUserInfo(ctx context.Context, session *sessionInfo, t *aut
 		return info.User{}, errors.New("session is in offline mode")
 	}
 
-	idToken, err := session.authCfg.provider.Verifier(&b.oidcCfg).Verify(ctx, t.RawIDToken)
-	if err != nil {
-		return info.User{}, fmt.Errorf("could not verify token: %v", err)
+	var idToken *oidc.IDToken
+
+	if !b.providerInfo.SkipIDTokenVerification() {
+		idToken, err = session.authCfg.provider.Verifier(&b.oidcCfg).Verify(ctx, t.RawIDToken)
+
+		if err != nil {
+			fmt.Println(b.oidcCfg)
+			fmt.Println(t.RawIDToken)
+			return info.User{}, fmt.Errorf("could not verify token: %v", err)
+		}
 	}
 
 	userInfo, err = b.providerInfo.GetUserInfo(ctx, t.Token, idToken)
