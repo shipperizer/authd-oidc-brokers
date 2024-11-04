@@ -93,7 +93,7 @@ func (p Provider) GetUserInfo(ctx context.Context, accessToken *oauth2.Token, id
 	}
 
 	return info.NewUser(
-		fmt.Sprintf("%d", user.GetID()), // use GH id
+		user.GetEmail(), // use GH login
 		"",
 		"",
 		"",
