@@ -9,6 +9,7 @@ import (
 
 	"github.com/coreos/go-oidc/v3/oidc"
 	ghapi "github.com/google/go-github/v66/github"
+	"github.com/google/uuid"
 	"github.com/ubuntu/authd-oidc-brokers/internal/providers/info"
 	"github.com/ubuntu/authd-oidc-brokers/internal/providers/noprovider"
 	"golang.org/x/oauth2"
@@ -95,7 +96,7 @@ func (p Provider) GetUserInfo(ctx context.Context, accessToken *oauth2.Token, id
 	return info.NewUser(
 		user.GetEmail(), // use GH login
 		"",
-		"",
+		uuid.NewSHA1(uuid.NameSpaceURL, []byte(user.GetLogin())).String(),
 		"",
 		"",
 		[]info.Group{},
