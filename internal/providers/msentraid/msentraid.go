@@ -47,6 +47,11 @@ func (p Provider) CoreConfig() *oidc.Provider {
 	return nil
 }
 
+// SkipIDTokenVerification caters for use cases where IDToken is not present or is not a jwt
+func (p Provider) SkipIDTokenVerification() bool {
+	return false
+}
+
 // Scopes returns the generic scopes required by the provider.
 func (p Provider) Scopes() []string {
 	return append(consts.DefaultScopes, oidc.ScopeOfflineAccess, "GroupMember.Read.All", "User.Read")

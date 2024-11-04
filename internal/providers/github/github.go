@@ -42,6 +42,11 @@ func (p Provider) CoreConfig() *oidc.Provider {
 	return config.NewProvider(context.TODO())
 }
 
+// SkipIDTokenVerification caters for use cases where IDToken is not present or is not a jwt
+func (p Provider) SkipIDTokenVerification() bool {
+	return true
+}
+
 // Scopes returns the generic scopes required by the provider.
 func (p Provider) Scopes() []string {
 	return []string{"user:email"}

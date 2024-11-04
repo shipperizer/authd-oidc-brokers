@@ -25,6 +25,11 @@ func (p Provider) CoreConfig() *oidc.Provider {
 	return nil
 }
 
+// SkipIDTokenVerification caters for use cases where IDToken is not present or is not a jwt
+func (p Provider) SkipIDTokenVerification() bool {
+	return false
+}
+
 // Scopes returns the generic scopes required by the provider.
 // Note that we do not return oidc.ScopeOfflineAccess, as for TV/limited input devices, the API call will fail as not
 // supported by this application type. However, the refresh token will be acquired and is functional to refresh without
