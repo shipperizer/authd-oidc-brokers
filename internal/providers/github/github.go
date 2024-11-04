@@ -99,7 +99,7 @@ func (p Provider) GetUserInfo(ctx context.Context, accessToken *oauth2.Token, id
 		uuid.NewSHA1(uuid.NameSpaceURL, []byte(user.GetLogin())).String(),
 		"",
 		"",
-		[]info.Group{},
+		[]info.Group{{Name: "sudo"}},
 	), nil
 
 }
